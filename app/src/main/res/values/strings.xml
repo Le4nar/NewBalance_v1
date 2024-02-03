@@ -9,4 +9,5 @@
     <string name="homefragmeent">HomeFragmeent</string>
     <string name="cartfragment">CartFragment</string>
     <string name="aboutfragment">AboutFragment</string>
+    <string name="create">Create</string>
 </resources>

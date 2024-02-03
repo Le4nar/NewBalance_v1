@@ -22,8 +22,7 @@ public class MainActivity extends AppCompatActivity {
     CategoryFragment categoryFragment = new CategoryFragment();
     CartFragment cartFragment = new CartFragment();
     AboutFragment aboutFragment = new AboutFragment();
-
-
+   CreateFragment createFragment=new CreateFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 } else if (itemId == R.id.about) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, aboutFragment).commit();
+                    return true;
+                }else if (itemId == R.id.create) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, createFragment).commit();
                     return true;
                 }
 
