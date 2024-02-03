@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.content.Intent;
@@ -21,7 +22,13 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
 import androidx.fragment.app.Fragment;
+
+import com.hfad.newbalance.db.AppDatabase;
+import com.hfad.newbalance.db.Item;
+import com.hfad.newbalance.db.ItemDao;
+
 import java.io.IOException;
 
 public class CreateFragment extends Fragment {
@@ -30,6 +37,12 @@ public class CreateFragment extends Fragment {
 
     private ImageView imageView;
     private ImageButton buttonAttachPhoto;
+    private Button button;
+
+    private EditText descriptionEt;
+    private EditText priceEt;
+    private EditText nameEt;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,8 +52,24 @@ public class CreateFragment extends Fragment {
         // Нахождение ссылок на элементы интерфейса
         imageView = view.findViewById(R.id.imageView);
         buttonAttachPhoto = view.findViewById(R.id.buttonAttachPhoto);
+        button = view.findViewById(R.id.buttonAdd);
+        descriptionEt = view.findViewById(R.id.editTextDescription);
+        priceEt = view.findViewById(R.id.editTextPrice);
+        nameEt = view.findViewById(R.id.editTextName);
 
         // Обработка нажатия на кнопку "Прикрепить фото"
+
+
+        // Остальной код фрагмента
+
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addToDb();
+
+            }
+        });
         buttonAttachPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,9 +77,19 @@ public class CreateFragment extends Fragment {
             }
         });
 
-        // Остальной код фрагмента
-
         return view;
+    }
+
+    private void addToDb() {
+        String name = nameEt.getText().toString();
+        String description = descriptionEt.getText().toString();
+        String price = priceEt.getText().toString();
+
+        AppDatabase appDatabase = AppDatabase.getInstance(requireContext());
+        ItemDao itemDao = appDatabase.getItemDao();
+
+        Item item = new Item(name,price,description);
+        itemDao.insert(item);
     }
 
     private void openGallery() {
@@ -58,6 +97,7 @@ public class CreateFragment extends Fragment {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -74,4 +114,5 @@ public class CreateFragment extends Fragment {
             }
         }
     }
+
 }
