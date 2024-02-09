@@ -29,6 +29,7 @@ import com.hfad.newbalance.db.AppDatabase;
 import com.hfad.newbalance.db.Item;
 import com.hfad.newbalance.db.ItemDao;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class CreateFragment extends Fragment {
@@ -57,7 +58,8 @@ public class CreateFragment extends Fragment {
         priceEt = view.findViewById(R.id.editTextPrice);
         nameEt = view.findViewById(R.id.editTextName);
 
-        // Обработка нажатия на кнопку "Прикрепить фото"
+
+
 
 
         // Остальной код фрагмента
@@ -80,17 +82,6 @@ public class CreateFragment extends Fragment {
         return view;
     }
 
-    private void addToDb() {
-        String name = nameEt.getText().toString();
-        String description = descriptionEt.getText().toString();
-        String price = priceEt.getText().toString();
-
-        AppDatabase appDatabase = AppDatabase.getInstance(requireContext());
-        ItemDao itemDao = appDatabase.getItemDao();
-
-        Item item = new Item(name,price,description);
-        itemDao.insert(item);
-    }
 
     private void openGallery() {
         // Открыть галерею для выбора фотографии
@@ -113,6 +104,29 @@ public class CreateFragment extends Fragment {
                 e.printStackTrace();
             }
         }
+    }  private void addToDb() {
+        String name = nameEt.getText().toString();
+        String description = descriptionEt.getText().toString();
+        String price = priceEt.getText().toString();
+
+
+
+        imageView.setDrawingCacheEnabled(true);
+        imageView.buildDrawingCache();
+        Bitmap bitmap = imageView.getDrawingCache();
+
+        // Преобразование объекта Bitmap в массив байтов
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] imageData = stream.toByteArray();
+
+        AppDatabase appDatabase = AppDatabase.getInstance(requireContext());
+        ItemDao itemDao = appDatabase.getItemDao();
+
+        Item item = new Item(name,price,description,imageData);
+        itemDao.insert(item);
     }
+
+
 
 }
