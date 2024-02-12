@@ -21,12 +21,16 @@ public class Item {
     public String price;
 
     public byte[] imageData;
+     public boolean gender;
+     // true men
+    //false famele
 
-public Item (String name,String price, String description, byte[] imageDate){
+public Item (String name,String price, String description, byte[] imageDate, boolean geender){
     this.name=name;
     this.description=description;
     this.price=price;
     this.imageData=imageDate;
+    this.gender=geender;
 }
 
 }

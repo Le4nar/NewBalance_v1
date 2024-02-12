@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.content.Intent;
@@ -43,6 +44,8 @@ public class CreateFragment extends Fragment {
     private EditText descriptionEt;
     private EditText priceEt;
     private EditText nameEt;
+    private CheckBox genderEt;
+
 
 
     @Override
@@ -57,8 +60,7 @@ public class CreateFragment extends Fragment {
         descriptionEt = view.findViewById(R.id.editTextDescription);
         priceEt = view.findViewById(R.id.editTextPrice);
         nameEt = view.findViewById(R.id.editTextName);
-
-
+        genderEt = view.findViewById(R.id.genderCheckBox);
 
 
 
@@ -108,6 +110,7 @@ public class CreateFragment extends Fragment {
         String name = nameEt.getText().toString();
         String description = descriptionEt.getText().toString();
         String price = priceEt.getText().toString();
+        boolean gender = genderEt.isChecked();
 
 
 
@@ -123,7 +126,7 @@ public class CreateFragment extends Fragment {
         AppDatabase appDatabase = AppDatabase.getInstance(requireContext());
         ItemDao itemDao = appDatabase.getItemDao();
 
-        Item item = new Item(name,price,description,imageData);
+        Item item = new Item(name,price,description,imageData,gender);
         itemDao.insert(item);
     }
 
