@@ -1,64 +1,86 @@
-package com.hfad.newbalance;
+    package com.hfad.newbalance;
 
-import android.os.Bundle;
+    import android.os.Bundle;
+    import android.view.LayoutInflater;
+    import android.view.View;
+    import android.view.ViewGroup;
 
-import androidx.fragment.app.Fragment;
+    import androidx.annotation.NonNull;
+    import androidx.annotation.Nullable;
+    import androidx.fragment.app.Fragment;
+    import androidx.fragment.app.FragmentManager;
+    import androidx.fragment.app.FragmentTransaction;
+    import androidx.recyclerview.widget.LinearLayoutManager;
+    import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+    import com.hfad.newbalance.db.AppDatabase;
+    import com.hfad.newbalance.db.Item;
+    import com.hfad.newbalance.db.ItemDao;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ManCategory#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ManCategory extends Fragment {
+    import java.util.ArrayList;
+    import java.util.Iterator;
+    import java.util.List;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    public class ManCategory extends Fragment implements MyAdapterCategory.OnItemClickListener {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+        private RecyclerView recyclerView;
+        private MyAdapterCategory adapterCategory;
+        private ArrayList<Item> items;
 
-    public ManCategory() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ManCategory.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ManCategory newInstance(String param1, String param2) {
-        ManCategory fragment = new ManCategory();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        @Nullable
+        @Override
+        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            // Inflate the layout for this fragment
+            View view = inflater.inflate(R.layout.fragment_man_category, container, false);
+
+            // Инициализируем RecyclerView
+
+
+            return view;
+        }
+
+        @Override
+        public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+            super.onViewCreated(view, savedInstanceState);
+
+            recyclerView = view.findViewById(R.id.recyclerViewManCategory);
+            recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+
+
+            // Получаем данные из базы данных
+            AppDatabase appDatabase = AppDatabase.getInstance(requireContext());
+            ItemDao itemDao = appDatabase.getItemDao();
+            items = new ArrayList<>(itemDao.getItemsByGender(true));
+
+
+            adapterCategory = new MyAdapterCategory(items,this, requireActivity().getSupportFragmentManager());
+            recyclerView.setAdapter(adapterCategory);
+
+        }
+
+
+        public void onItemClick(Item item) {
+            // Обработка нажатия на элемент списка. Здесь вы можете открыть другой фрагмент и передать данные о выбранном товаре.
+
+            // Создать новый экземпляр ItemDetailsFragment
+            ItemDetailsFragment fragment = ItemDetailsFragment.newInstance(item);
+
+            // Получить FragmentManager из активити
+            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+
+            // Начать транзакцию фрагмента
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            // Заменить текущий фрагмент на ItemDetailsFragment
+            fragmentTransaction.replace(R.id.container, fragment);
+
+            // Добавить транзакцию в бэкстек
+            fragmentTransaction.addToBackStack(null);
+
+            // Зафиксировать транзакцию
+            fragmentTransaction.commit();
         }
     }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_man_category, container, false);
-    }
-}

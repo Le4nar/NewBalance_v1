@@ -12,8 +12,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class CategoryFragment extends Fragment {
 
-    private ImageView ImageWomenCategory;
-    private ImageView ImageMenCategory;
+    private ImageView imageWomenCategory;
+    private ImageView imageMenCategory;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -22,24 +22,24 @@ public class CategoryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_category, container, false);
 
         // Найти картинку
-        ImageWomenCategory = view.findViewById(R.id.imageWomenCategory);
-        ImageMenCategory = view.findViewById(R.id.imageMenCategory);
+        imageWomenCategory = view.findViewById(R.id.imageWomenCategory);
+        imageMenCategory = view.findViewById(R.id.imageMenCategory);
 
 
         // Добавить слушателя события onClick() к картинке
-        ImageWomenCategory.setOnClickListener(new View.OnClickListener() {
+        imageWomenCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Заменить текущий фрагмент на новый фрагмент
                 FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
 
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container, new WomanCategory());
+                fragmentTransaction.replace(R.id.container, new WomenCategory());
                 fragmentTransaction.commit();
             }
         });
 
-        ImageMenCategory.setOnClickListener(new View.OnClickListener() {
+        imageMenCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Заменить текущий фрагмент на новый фрагмент

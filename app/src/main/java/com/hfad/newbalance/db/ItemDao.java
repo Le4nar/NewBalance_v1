@@ -17,11 +17,15 @@ public interface ItemDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Item item);
 
-
+    @Query("SELECT id FROM Item WHERE id = :itemId")
+    int getId(int itemId);
 
     @Delete
     void delete(Item item);
 
     @Query("SELECT * FROM item WHERE name = :name")
     List<Item> getItemByName(String name);
+
+    @Query("SELECT * FROM item WHERE gender = :gender")
+    List<Item> getItemsByGender(Boolean gender);
 }

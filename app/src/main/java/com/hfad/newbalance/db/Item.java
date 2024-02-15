@@ -12,7 +12,7 @@ import androidx.room.PrimaryKey;
 public class Item {
     public Item() {}
     @PrimaryKey(autoGenerate = true)
-    int id;
+   public int id;
 
     public String name;
 
@@ -25,12 +25,12 @@ public class Item {
      // true men
     //false famele
 
-public Item (String name,String price, String description, byte[] imageDate, boolean geender){
+public Item (String name,String price, String description, byte[] imageDate, boolean gender){
     this.name=name;
     this.description=description;
     this.price=price;
     this.imageData=imageDate;
-    this.gender=geender;
+    this.gender=gender;
 }
 
 }

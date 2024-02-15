@@ -1,7 +1,6 @@
 package com.hfad.newbalance;
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hfad.newbalance.MyAdapter;
-import com.hfad.newbalance.R;
 import com.hfad.newbalance.db.AppDatabase;
 import com.hfad.newbalance.db.Item;
 import com.hfad.newbalance.db.ItemDao;
