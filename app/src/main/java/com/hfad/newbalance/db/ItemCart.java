@@ -1,20 +1,17 @@
 package com.hfad.newbalance.db;
 
-import android.graphics.Bitmap;
-import android.media.Image;
-import android.widget.ImageView;
-
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
 @Entity
-public class Item implements Serializable {
-    public Item() {}
+public class ItemCart implements Serializable {
+    public ItemCart() {
+
+    }
     @PrimaryKey(autoGenerate = true)
-   public int id;
+    public int id;
 
     public String name;
 
@@ -27,7 +24,7 @@ public class Item implements Serializable {
      // true men
     //false female
 
-public Item (String name,String price, String description, byte[] imageDate, boolean gender){
+public ItemCart(String name, String price, String description, byte[] imageDate, boolean gender){
     this.name=name;
     this.description=description;
     this.price=price;

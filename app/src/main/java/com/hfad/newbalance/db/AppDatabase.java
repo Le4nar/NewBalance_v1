@@ -8,11 +8,13 @@ import androidx.room.RoomDatabase;
 
 import com.hfad.newbalance.db.ItemDao;
 
-@Database(version = 1, entities = {Item.class})
+@Database(version = 1, entities = {Item.class, ItemCart.class})
+
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase instance;
 
     public abstract ItemDao getItemDao();
+    public abstract ItemCartDao getItemCartDao();
 
 
     public static synchronized AppDatabase getInstance(Context context) {

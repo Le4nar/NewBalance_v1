@@ -54,7 +54,7 @@ public class MyAdapterCategory extends RecyclerView.Adapter<MyAdapterCategory.My
         int itemId = items.get(position).id;
         Bundle args = new Bundle();
         args.putInt("itemId", itemId);
-        ItemDetailsFragment fragment = ItemDetailsFragment.newInstance(args);
+        ItemDetailsFragment fragment = ItemDetailsFragment.newInstance(items.get(position));
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .addToBackStack(null)
@@ -120,6 +120,7 @@ public class MyAdapterCategory extends RecyclerView.Adapter<MyAdapterCategory.My
             descriptionTextView = itemView.findViewById(R.id.descriptionTextView);
             priceTextView = itemView.findViewById(R.id.priceTextView);
             imageView = itemView.findViewById(R.id.product_image);
+
         }
     }
 

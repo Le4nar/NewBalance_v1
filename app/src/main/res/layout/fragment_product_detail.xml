@@ -53,7 +53,8 @@
         tools:text="111111"
 
         />
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBuy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"

@@ -35,7 +35,7 @@
             // Inflate the layout for this fragment
             View view = inflater.inflate(R.layout.fragment_man_category, container, false);
 
-            // Инициализируем RecyclerView
+
 
 
             return view;
