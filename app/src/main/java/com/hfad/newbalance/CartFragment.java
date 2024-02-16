@@ -19,19 +19,20 @@ import com.hfad.newbalance.db.ItemCartDao;
 import com.hfad.newbalance.db.ItemDao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment implements MyAdapterCategory.OnItemClickListener {
 
     private RecyclerView recyclerView;
     private MyAdapterCategory adapterCategory;
-    private ArrayList<ItemCart> itemsCart;
+    private List<ItemCart> itemsCart;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_cart, container, false);
-
 
 
     }
@@ -42,19 +43,42 @@ public class CartFragment extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
 
-        recyclerView = view.findViewById(R.id.recyclerViewManCategory);
+        setupRecycler();
+
+
+
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
 
-//        // Получаем данные из базы данных
-//        AppDatabase appDatabase = AppDatabase.getInstance(requireContext());
-//        ItemCartDao itemCartDao = appDatabase.getItemCartDao();
-//        itemsCart = new ArrayList<>(itemCartDao.getItemsByGender(true));
-//
-//
-//        adapterCategory = new MyAdapterCategory(itemsCart,this, requireActivity().getSupportFragmentManager());
-//        recyclerView.setAdapter(adapterCategory);
+        // Получаем данные из базы данных
+        AppDatabase appDatabase = AppDatabase.getInstance(requireContext());
+        ItemCartDao itemCartDao = appDatabase.getItemCartDao();
+        itemsCart = itemCartDao.getAll();
+        ArrayList<Item> items = null;
+        for (int i = 0; i < itemsCart.size(); i++) {
+            String name = itemsCart.get(i).name;
+            String price = itemsCart.get(i).price;
+            String description = itemsCart.get(i).description;
+            byte[] imageData = itemsCart.get(i).imageData;
+            boolean gender = itemsCart.get(i).gender;
+            Item item = new Item(name, price, description, imageData, gender);
+
+            items.add(item);
+        }
+
+        adapterCategory = new MyAdapterCategory(items, this, requireActivity().getSupportFragmentManager());
+        recyclerView.setAdapter(adapterCategory);
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
+
 
     }
 
+    private void setupRecycler() {
+        recyclerView = requireView().findViewById(R.id.recyclerViewCart);
+    }
+
+    @Override
+    public void onItemClick(Item item) {
+
+    }
 }

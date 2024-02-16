@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hfad.newbalance.db.Item;
+import com.hfad.newbalance.db.ItemCart;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,24 @@ public class MyAdapterCategory extends RecyclerView.Adapter<MyAdapterCategory.My
         this.listener = listener;
         this.fragmentManager = fragmentManager; // Присвойте переданный FragmentManager
     }
+//
+//    public MyAdapterCategory(List<ItemCart> itemsCart, OnItemClickListener listener, FragmentManager fragmentManager) {
+//
+//
+//        for (int i = 0; i < itemsCart.size(); i++) {
+//           Item item  = new Item(itemsCart.get(i).name,itemsCart.get(i).price,itemsCart.get(i).description,itemsCart.get(i).imageData,itemsCart.get(i).gender);
+//           items.add(item);
+//        }
+//
+//
+//
+//        this.listener = listener;
+//        this.fragmentManager = fragmentManager; // Присвойте переданный FragmentManager
+//    }
+//
+//
+//
+
     public interface OnItemClickListener {
          void onItemClick(Item item);
     }
