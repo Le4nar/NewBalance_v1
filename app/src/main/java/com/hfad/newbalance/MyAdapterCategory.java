@@ -25,7 +25,7 @@ public class MyAdapterCategory extends RecyclerView.Adapter<MyAdapterCategory.My
     private OnItemClickListener listener; // Объявление интерфейса
     private ArrayList<Item> items;
 
-    private FragmentManager fragmentManager; // Добавьте это поле
+    private FragmentManager fragmentManager;
 
 
     public void setOnItemClickListener(OnItemClickListener listener) {

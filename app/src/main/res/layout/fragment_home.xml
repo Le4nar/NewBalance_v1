@@ -2,19 +2,80 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".HomeFragment">
+    tools:context=".HomeFragment"
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    tools:ignore="ExtraText">
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:padding="8dp" />
+        android:layout_height="match_parent"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
 
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="ХІТИ ПРОДАЖІВ"
+                android:textStyle="bold"
+               android:gravity="center"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="8dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:src="@drawable/newbalance1"
+
+                />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="СПОРТИВНИЙ МАГАЗИН NEW BALANCE"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Магазин спортивного одягу Нью Беланс демонструє поєднання спорту та сучасної моди. Підприємство дорожить класикою та традиціями виробництва, але регулярно впроваджує нові підходи, щоб підвищити функціональність та універсальність моделей, що випускаються." />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="ОФІЦІЙНИЙ САЙТ NEW BALANCE"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Головний дистриб'ютор брендової продукції України. Доставка здійснюється Новою Поштою до всіх можливих регіонів. Це швидко, надійно та перевірено. Ви можете бути впевненими в оригінальності товарів та збереженні всіх характеристик. В інтернет-магазині очікує широкий вибір асортименту для кожного любителя вільного стилю та фаната компанії. Завдяки зручному інтерфейсу можна вибрати відповідні за запитом фільтри категорій. Сторінок із виробами дуже багато: від трикотажу до аксесуарів, тому рекомендуємо приділити час знайомству з ними. У кожній картці є детальні описи значущих особливостей, а студійні фото дозволяють краще розглянути всі деталі.
+
+Оформити бажане замовлення можна за кілька хвилин. Для цього необхідно додати вибраних фаворитів у кошик. Крок другий — вкажіть актуальні контактні дані та сплатіть будь-яким способом. Залишається тільки чекати на повідомлення від логістичної служби про прибуття посилки. Вперед за покупками!" />
+
+
+        </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

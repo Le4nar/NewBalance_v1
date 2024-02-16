@@ -27,4 +27,8 @@ public interface ItemCartDao {
 
     @Query("SELECT * FROM itemCart WHERE gender = :gender")
     List<ItemCart> getItemsByGender(Boolean gender);
+
+    @Query("DELETE FROM ItemCart")
+    void deleteAll();
+
 }
